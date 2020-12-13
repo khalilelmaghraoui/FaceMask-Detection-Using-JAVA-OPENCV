@@ -1,0 +1,23 @@
+
+The FaceMask Detection Project Plan
+
+    # set-up OpenCV, and Scene builder javafx in Intellij IDEA
+    # Create the conception for our project using Class Diagram in UML
+    #There are Only two main steps that we are going to work on :
+
+         1 - Identify human Face and Mouth in each frame of input video
+         2- Identify Person is using Mask or not
+
+    #Step one :  Identify Face and Mouth
+
+         1 - create our own haar Cascade trained File 'Cascade Classier'Class using "Cascade Trainer GUI"
+             or we can  Download it from other project .
+         2- Read video or camera Input
+
+         3 - detect face using  detectMultiScale method
+
+     #Step two :  Identify Person is using Mask or not
+
+
+    *Ps : I found HAAR CASCADE XML FILES ready to use .
+    *ps : wash baqin katsnaw kolchi kayn t7rek azbi

@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="opencv-401">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/FaceDetect2/lib/opencv-401.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../opencv-4.5.0-vc14_vc15/opencv/build/java/opencv-450.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <NATIVE>
+      <root url="file://$PROJECT_DIR$/../../../../opencv-4.5.0-vc14_vc15/opencv/build/java/x64" />
+    </NATIVE>
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../../../../opencv-4.5.0-vc14_vc15/opencv/build/java/opencv-450.jar!/" />
+    </SOURCES>
+  </library>
+</component>
