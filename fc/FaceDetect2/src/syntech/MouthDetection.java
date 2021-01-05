@@ -176,10 +176,10 @@ public class MouthDetection {
 
                         //MOUTH DETECTION CODE ENDS HERE
                         if(mouthRects.length <1 ){
-                             Imgproc.putText(frame,"thank you",new Point(r.tl().x+5,r.br().y+18),Core.FONT_HERSHEY_TRIPLEX,fontScale,new Scalar(255, 255, 255),1);
+                             Imgproc.putText(frame,"bo elik",new Point(r.tl().x+5,r.br().y+18),Core.FONT_HERSHEY_TRIPLEX,fontScale,new Scalar(255, 255, 255),1);
                         }
                         else if(mouthRects.length >1  ){
-                            Imgproc.putText(frame,"wear your face mask",new Point(r.tl().x+5,r.br().y+18),Core.FONT_HERSHEY_TRIPLEX,fontScale,new Scalar(255, 255, 255),1);
+                            Imgproc.putText(frame,"Lbs kmama khay pachir",new Point(r.tl().x+5,r.br().y+18),Core.FONT_HERSHEY_TRIPLEX,fontScale,new Scalar(255, 255, 255),1);
 
 
                         }
