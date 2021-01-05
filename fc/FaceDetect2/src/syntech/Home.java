@@ -31,8 +31,8 @@ public class Home extends javax.swing.JFrame {
      * Creates new form Home
      */
 
-    String source = "C:\\Users\\KURAPIKA.dll\\Desktop\\fc\\FaceDetect2\\xml\\haarcascade_frontalface_alt.xml"; //paste here
-    String source2 = "C:\\Users\\KURAPIKA.dll\\Desktop\\fc\\FaceDetect2\\xml\\haarcascade_mcs_mouth.xml";
+    String source = "fc\\FaceDetect2\\xml\\haarcascade_frontalface_alt.xml"; //paste here
+    String source2 = "fc\\FaceDetect2\\xml\\haarcascade_mcs_mouth.xml";
   //  String source = "C:\\Users\\ccs\\Desktop\\trafic\\vehicle_detection_haarcascades-master\\cars.xml";
     CascadeClassifier faceDetector = new CascadeClassifier(source);
     CascadeClassifier mouthDetector = new CascadeClassifier(source2);
@@ -127,23 +127,22 @@ public class Home extends javax.swing.JFrame {
 
                 Mat frame = new Mat();
                 Mat frame_gray = new Mat();
+                Scalar col4 = new Scalar(178, 138, 17);
 
 
-                Rect[] mouthArray;
-                MatOfRect ros = new MatOfRect();
-                MatOfByte mm= new MatOfByte();
-
-                Mat frame2 = new Mat();
-                Mat frame_gray2 = new Mat();
+                //MatOfRect ros = new MatOfRect();
 
 
                 Rect[] facesArray;
-                Graphics g2;
-                BufferedImage buff2 = null;
 
 
                 Graphics g;
                 BufferedImage buff = null;
+                CascadeClassifier mouthCascade = new CascadeClassifier();
+                if(!mouthCascade.load("fc\\FaceDetect2\\xml\\Mouth.xml")){
+                    System.out.println("could not load mouth.xml");
+                    return;
+                }
 
 
                 while(capture.read(frame)){
@@ -157,13 +156,10 @@ public class Home extends javax.swing.JFrame {
                             Imgproc.equalizeHist(frame_gray, frame_gray);
                             double w = frame.width();
                             double h = frame.height();
-                            faceDetector.detectMultiScale(frame_gray, rostros, 1.1, 2, CASCADE_SCALE_IMAGE, new Size(30, 30), new Size(w, h) );
-                            mouthDetector.detectMultiScale(frame_gray2,ros);
-
+                            faceDetector.detectMultiScale(frame_gray, rostros, 1.1, 2,CASCADE_SCALE_IMAGE, new Size(30, 30), new Size(w, h) );
                             facesArray = rostros.toArray();
-                            mouthArray = ros.toArray();
-                            System.out.println("face mask " + mouthArray.length);
-                            System.out.println("No of faces: "+facesArray.length);
+
+                            System.out.println("number Of Faces detected: "+facesArray.length);
 
                             for (int i = 0; i < facesArray.length; i++) {
 
@@ -185,22 +181,48 @@ public class Home extends javax.swing.JFrame {
                                         new Scalar(123, 213, 23, 220));
                               //  Imgproc.putText(frame, "Width: "+faceROI.width()+" Height: "+faceROI.height()+" X = "+facesArray[i].x+
                                //         " Y = "+facesArray[i].y, new Point(facesArray[i].x, facesArray[i].y-20), 1, 1, new Scalar(255,255,255));
-                                Imgproc.putText(frame, "This is human ", new Point(facesArray[i].x, facesArray[i].y-20), 1, 1, new Scalar(255,255,255));
-                                if(mouthArray.length==0){
-                                    Imgproc.putText(frame, "Face Mask ", new Point(facesArray[i].x, facesArray[i].y-20), 1, 1, new Scalar(255,255,255));
+                                Imgproc.putText(frame, "This is human   ", new Point(facesArray[i].x, facesArray[i].y-20), Core.FONT_HERSHEY_TRIPLEX, 1, new Scalar(255,255,255));
+                                //MOUTH DETECTION CODE STARTS HERE
 
-
-                                }
                             }
+                            MatOfRect mouth = new MatOfRect();
+                            double v=mouth.width();
+                            double c=mouth.height();
+//                            mouthCascade.detectMultiScale(face,mouth,1.5,5,CASCADE_SCALE_IMAGE,new Size(10, 10), new Size(v, c));
+//                            Rect[] mouthRects = mouth.toArray();
+//
+//                            if(mouthRects.length>=1 && faceRects.length==1) {
+//                                for (Rect m : mouthRects) {
+//                                    //209, 195, 0
+//                                    Point tl = new Point(r.tl().x + m.tl().x, r.tl().y + m.tl().y);
+//                                    Point br = new Point(r.tl().x + m.br().x, r.tl().y + m.br().y);
+//
+//                                    //  Imgproc.rectangle(frame, tl, br, col4, 2);
+//                                    //  Imgproc.putText(frame,"Mouth",new Point(tl.x, br.y),Core.FONT_HERSHEY_TRIPLEX,0.5,new Scalar(255, 255, 255),1);
+//                                    // Imgproc.line(frame, br, new Point(frame.width() - 155, br.y), col4, 2);
+//                                    // Imgproc.putText(frame, "wear your face mask", new Point(frame.width() - 150, br.y), Core.FONT_HERSHEY_TRIPLEX, 0.5, new Scalar(255, 255, 255), 1);
+//                                    // Imgproc.putText(frame," face mask detected" ,new Point(r.tl().x+5,r.br().y+18),Core.FONT_HERSHEY_TRIPLEX,fontScale,new Scalar(255, 255, 255),1);
+//                                }
+//                            }
+//                        else if(mouthRects.length<1 && faceRects.length==1){
+//                            Imgproc.putText(frame,"wear your face mask",new Point(r.tl().x+5,r.br().y+18),Core.FONT_HERSHEY_TRIPLEX,fontScale,new Scalar(255, 255, 255),1);
+//
+//
+//                        }
 
                             int no= facesArray.length;
-                            int nb= mouthArray.length;
+
                             lblnumber.setText(String.valueOf(no));
 
                              Imgcodecs.imencode(".bmp", frame, mem);
                             BufferedImage im = ImageIO.read(new ByteArrayInputStream(mem.toArray()));
                             buff = im;
                             g.drawImage(buff, 0, 0, jPanel1.getWidth(), jPanel1.getHeight(), 0, 0, buff.getWidth(), buff.getHeight(), null);
+
+
+
+
+
 
 
                         } catch (Exception ex) {
@@ -219,41 +241,7 @@ public class Home extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
 
-        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-
-
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Home().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
