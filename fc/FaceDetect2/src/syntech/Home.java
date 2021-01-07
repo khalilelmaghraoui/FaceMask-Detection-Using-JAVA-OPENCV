@@ -229,6 +229,11 @@ public class Home extends javax.swing.JFrame {
                 }
             }
 
+            public void main(String[] args) {
+                System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+            };
+
+
         }).start();
 
 

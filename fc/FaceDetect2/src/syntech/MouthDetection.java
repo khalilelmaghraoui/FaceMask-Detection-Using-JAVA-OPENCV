@@ -42,7 +42,7 @@ public class MouthDetection {
             Scalar red = new Scalar(0, 0, 255);
 
             // Camera exception error
-            if(!videoCapture.isOpened()){
+            if(!videoCapture.isOpened()){   
                 System.out.println("No cam found");
                 return;
             }
@@ -121,7 +121,7 @@ public class MouthDetection {
                         //MOUTH DETECTION CODE ENDS HERE
 
 
-                        //  Detection of the Mask 
+                        //  Detection of the Mask
                         if(mouthRects.length <1 ){
                             Imgproc.rectangle(frame,r.tl(),r.br(),green,3);
                             Imgproc.rectangle(frame,startingPoint,endingPoint,green,-1);
