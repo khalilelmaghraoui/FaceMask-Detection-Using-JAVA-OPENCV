@@ -42,7 +42,7 @@ public class MouthDetection {
             Scalar red = new Scalar(0, 0, 255);
 
             // Camera exception error
-            if(!videoCapture.isOpened()){   
+            if(!videoCapture.isOpened()){
                 System.out.println("No cam found");
                 return;
             }
