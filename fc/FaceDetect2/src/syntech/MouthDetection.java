@@ -14,7 +14,8 @@ public class MouthDetection {
 
         static {System.loadLibrary(Core.NATIVE_LIBRARY_NAME);}
 
-        public static void main(String[] args) {
+
+    public static void main(String[] args) {
 
             // Load both FACE & MOUTH Classifier
             CascadeClassifier faceCascade = new CascadeClassifier();
