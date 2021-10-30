@@ -108,7 +108,7 @@ public class MouthDetection {
                         MatOfRect mouth = new MatOfRect();
                         double v=mouth.width();
                         double c=mouth.height();
-                        mouthCascade.detectMultiScale(face,mouth,1.5,5,CASCADE_SCALE_IMAGE,new Size(10, 10), new Size(v, c));
+                        mouthCascade.detectMultiScale(face,mouth,1.9,2,CASCADE_SCALE_IMAGE,new Size(10, 10), new Size(v, c));
                         Rect[] mouthRects = mouth.toArray();
 
                         if(mouthRects.length>=1 && faceRects.length==1) {
